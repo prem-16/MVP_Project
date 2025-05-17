@@ -27,7 +27,36 @@ def send_command(command, expect_image=False, save_as="received.jpg"):
 
     sock.close()
 
+
+def get_image(command, expect_image=False, save_as="received.jpg"):
+    sock = socket.socket()
+    sock.connect((RASPI_IP, PORT))
+    sock.sendall(command.encode())
+    data = b''
+    if expect_image:
+        img_len_bytes = sock.recv(4)
+        img_len = int.from_bytes(img_len_bytes, 'big')
+        
+        while len(data) < img_len:
+            packet = sock.recv(4096)
+            if not packet:
+                break
+            data += packet
+        with open(save_as, 'wb') as f:
+            f.write(data)
+        print(f"Image saved as {save_as}")
+        
+    else:
+        response = sock.recv(1024)
+        print("Response:", response.decode())
+    sock.close()
+    return save_as
+    
+   
+
 # Example usage
+
+
 if __name__ == "__main__":
     imageNumber="mirror_test"
 

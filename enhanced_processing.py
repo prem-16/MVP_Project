@@ -32,6 +32,66 @@ def crop_and_enhance_image(image_path):
     if img is None:
         print(f"Error: Could not read image from {image_path}")
         return
+    cv2.imshow('Original', img)
+    height, width = img.shape[:2]
+    print(f"\nOriginal image size: {width}x{height}")
+
+    # Define margins
+    # top_margin = int(height * 0.40)     # 40% from top
+    # bottom_margin = int(height * 0.18)   # 18% from bottom
+    # left_margin = int(width * 0.20)      # 20% from left
+    # right_margin = int(width * 0.45)     # 45% from right
+
+    # Define margins with your specific values
+    top_margin = int(height * 0.42)     # 47% from top
+    bottom_margin = int(height * 0.1)   # 13% from bottom
+    left_margin = int(width * 0.2)      # 20% from left
+    right_margin = int(width * 0.45)     # 48% from right
+
+    # Perform crop
+    crop = img[top_margin:height-bottom_margin, left_margin:width-right_margin]
+    height_crop, width_crop = crop.shape[:2]
+    print(f"\nOriginal image size: {width_crop}x{height_crop}")
+
+    # Apply enhancements
+    enhanced = apply_enhancements(crop)
+    
+    # Display all versions
+    
+    cv2.imshow('Cropped', crop)
+    cv2.imshow('Enhanced', enhanced)
+    
+    # Save enhanced version
+    output_path = "cropped_" + image_path.split('/')[-1]
+    cv2.imwrite(output_path, crop)
+    print(f"\nEnhanced image saved as: {output_path}")
+    
+    print("\nEnhancements applied:")
+    print("1. Sharpening using unsharp masking")
+    print("2. Contrast enhancement using CLAHE")
+    print("3. Slight color boost")
+    
+    cv2.imwrite("final_" + image_path.split('/')[-1], enhanced)
+    print("Saved final version!")
+    cv2.destroyAllWindows()
+    # while True:
+    #     key = cv2.waitKey(1) & 0xFF
+    #     if key == ord('q'):
+    #         break
+    #     elif key == ord('s'):
+    #         cv2.imwrite("final_" + image_path.split('/')[-1], enhanced)
+    #         print("Saved final version!")
+    #         break
+
+def crop_and_enhance_image_1(image_path):
+    print(f"Current Date and Time (UTC - YYYY-MM-DD HH:MM:SS formatted): {datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S')}")
+    print(f"Current User's Login: MananCoder29")
+    
+    # Read the image
+    img = cv2.imread(image_path)
+    if img is None:
+        print(f"Error: Could not read image from {image_path}")
+        return
     
     height, width = img.shape[:2]
     print(f"\nOriginal image size: {width}x{height}")
@@ -43,10 +103,10 @@ def crop_and_enhance_image(image_path):
     # right_margin = int(width * 0.45)     # 45% from right
 
     # Define margins with your specific values
-    top_margin = int(height * 0.47)     # 47% from top
-    bottom_margin = int(height * 0.13)   # 13% from bottom
-    left_margin = int(width * 0.20)      # 20% from left
-    right_margin = int(width * 0.48)     # 48% from right
+    top_margin = int(height * 0.4)     # 47% from top
+    bottom_margin = int(height * 0.12)   # 13% from bottom
+    left_margin = int(width * 0.2)      # 20% from left
+    right_margin = int(width * 0.3)     # 48% from right
 
     # Perform crop
     crop = img[top_margin:height-bottom_margin, left_margin:width-right_margin]
@@ -72,17 +132,18 @@ def crop_and_enhance_image(image_path):
     print("3. Slight color boost")
     
     print("\nPress 'q' to quit, 's' to save current version...")
-    while True:
-        key = cv2.waitKey(1) & 0xFF
-        if key == ord('q'):
-            break
-        elif key == ord('s'):
-            cv2.imwrite("final_" + image_path.split('/')[-1], enhanced)
-            print("Saved final version!")
-            break
-    
+    cv2.imwrite("final_" + image_path.split('/')[-1], enhanced)
+    print("Saved final version!")
     cv2.destroyAllWindows()
+    # while True:
+    #     key = cv2.waitKey(1) & 0xFF
+    #     if key == ord('q'):
+    #         break
+    #     elif key == ord('s'):
+    #         cv2.imwrite("final_" + image_path.split('/')[-1], enhanced)
+    #         print("Saved final version!")
+    #         break
 
 if __name__ == "__main__":
-    image_path = "images/test_image_FG37.jpg"
+    image_path = "images/received_6.jpg"
     crop_and_enhance_image(image_path)
