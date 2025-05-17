@@ -52,8 +52,8 @@ def process_with_interval(cmd, save_as, interval_s, skip):
     return image
 
 if __name__ == "__main__":
-    imageNumber = "gala_7_good"
-    interval = 1.347  # seconds, for example
+    imageNumber = "brabern_validate_good"
+    interval = 1.349  # seconds, for example
     
     # list of (command, filename suffix) pairs
     jobs = [
