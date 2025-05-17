@@ -2,6 +2,7 @@ import socket
 
 RASPI_IP = '192.168.0.20'  # Or use IP like '192.168.1.10'
 PORT = 9000
+from time import sleep
 
 def send_command(command, expect_image=False, save_as="received.jpg"):
     sock = socket.socket()
@@ -27,5 +28,28 @@ def send_command(command, expect_image=False, save_as="received.jpg"):
     sock.close()
 
 # Example usage
-send_command("take_image test1.jpg", expect_image=True)
-send_command("move_servo 1")
+if __name__ == "__main__":
+    
+
+    send_command("take_image test_image_FGS580.jpg", expect_image=True, save_as="test_image_FGS580.jpg") # FGS580
+    send_command("move_servo 1")
+    sleep(2)
+    send_command("take_image test_image_FGUV.jpg", expect_image=True, save_as = "test_image_FGUV.jpg")
+    send_command("move_servo 1")
+    sleep(2)
+    send_command("take_image test_image_FGL850.jpg", expect_image=True, save_as = "test_image_FGL850.jpg")
+    send_command("move_servo 1")
+    sleep(2)
+    send_command("take_image test_image_FG37.jpg", expect_image=True, save_as = "test_image_FG37.jpg")
+    send_command("move_servo 1")
+    sleep(2)
+    send_command("move_servo 1")
+    sleep(2)
+    send_command("take_image test_image_FG1000.jpg", expect_image=True, save_as ="test_image_FG1000.jpg")
+    send_command("move_servo 1")
+    sleep(2)
+
+
+
+
+

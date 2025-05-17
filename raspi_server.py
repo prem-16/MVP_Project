@@ -14,12 +14,29 @@ def move_servo(steps):
         servo.mid()
 
 def take_image(image_name="test.jpg"):
-    cam = Camera()
-    cam.start_preview()
-    sleep(2)
-    cam.take_photo(image_name)
-    return image_name
+    picam2 = Picamera2()
 
+    # Set the camera resolution
+    config = picam2.create_still_configuration(main={"size": (2048, 1024)})
+    picam2.configure(config)
+
+    # Start the camera
+    picam2.start()
+    time.sleep(1)  # Let camera warm up
+
+    # Set exposure and gain manually
+    # Note: Must turn off auto-exposure first
+    picam2.set_controls({
+        "AeEnable": False,           # Disable auto exposure
+        "ExposureTime": 10000,       # In microseconds (e.g., 10000 us = 10 ms)
+        "AnalogueGain": 2.0          # Gain factor (e.g., 2.0 = 2x)
+    })
+
+    # Capture an image
+    picam2.capture_file("image.jpg")
+
+    # Stop the camera
+    picam2.stop()
 def handle_client(conn):
     try:
         while True:
