@@ -29,23 +29,23 @@ def send_command(command, expect_image=False, save_as="received.jpg"):
 
 # Example usage
 if __name__ == "__main__":
-    
+    imageNumber="mirror_test"
 
-    send_command("take_image test_image_FGS580.jpg", expect_image=True, save_as="test_image_FGS580.jpg") # FGS580
+    send_command("take_image test_image_FGS580.jpg", expect_image=True, save_as=f"test_image_{imageNumber}_FGS580.jpg") # FGS580
     send_command("move_servo 1")
     sleep(2)
-    send_command("take_image test_image_FGUV.jpg", expect_image=True, save_as = "test_image_FGUV.jpg")
+    send_command("take_image test_image_FGUV.jpg", expect_image=True, save_as = f"test_image_{imageNumber}_FGUV.jpg")
     send_command("move_servo 1")
     sleep(2)
-    send_command("take_image test_image_FGL850.jpg", expect_image=True, save_as = "test_image_FGL850.jpg")
+    send_command("take_image test_image_FGL850.jpg", expect_image=True, save_as = f"test_image_{imageNumber}_FGL850.jpg")
     send_command("move_servo 1")
     sleep(2)
-    send_command("take_image test_image_FG37.jpg", expect_image=True, save_as = "test_image_FG37.jpg")
+    send_command("take_image test_image_FG37.jpg", expect_image=True, save_as = f"test_image_{imageNumber}_FG37.jpg")
     send_command("move_servo 1")
     sleep(2)
     send_command("move_servo 1")
     sleep(2)
-    send_command("take_image test_image_FG1000.jpg", expect_image=True, save_as ="test_image_FG1000.jpg")
+    send_command("take_image test_image_FG1000.jpg", expect_image=True, save_as =f"test_image_{imageNumber}_FG1000.jpg")
     send_command("move_servo 1")
     sleep(2)
 
