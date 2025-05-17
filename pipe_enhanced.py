@@ -52,7 +52,7 @@ def process_with_interval(cmd, save_as, interval_s, skip):
     return image
 
 if __name__ == "__main__":
-    imageNumber = "janagold_2_good"
+    imageNumber = "gala_7_good"
     interval = 1.347  # seconds, for example
     
     # list of (command, filename suffix) pairs
